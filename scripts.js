@@ -66,9 +66,31 @@ form.onsubmit = (event) => {
         expenseIcon.setAttribute("src", `img/${newExpense.category_id}.svg`);
         expenseIcon.setAttribute("alt", newExpense.category_name);
 
+        // Cria a Infor da despesa
+
+        const expenseInfo = document.createElement("div");
+        expenseInfo.classList.add("expense-info");
+
+
+        /// Cria o nome das despesas
+
+        const expenseName = document.createElement("strong");
+        expenseName.textContent = newExpense.expense;
+
+        // Cria a catergoria da despesa
+
+        const expenseCategory = document.createElement("span");
+        expenseCategory.textContent = newExpense.expense;
+
+
+        // adiciona as informações na div de informações
+
+        expenseInfo.append(expenseName, expenseCategory);
+
+
         // Adicona as informações no item
-        expenseItem.append(expenseIcon)
-        
+        expenseItem.append(expenseIcon, expenseInfo)
+
         // adiciona o item na lista
         expensesList.append(expenseItem);
      } catch (error) {
