@@ -3,6 +3,7 @@ const form = document.querySelector("form");
 const amount = document.getElementById("amount");
 const expense = document.getElementById("expense");
 const category = document.getElementById("category");
+const expenseInput = document.getElementById("expense");
 
 // Seleciona os elementos da lista de despesas
 
@@ -98,3 +99,11 @@ form.onsubmit = (event) => {
         
      }
  }
+
+
+    // Adiciona um evento de entrada
+    expenseInput.addEventListener('input', () => {
+      // Remove caracteres que não são letras usando regex
+      expenseInput.value = expenseInput.value.replace(/[^a-zA-ZáéíóúàèìòùâêîôûãõçÁÉÍÓÚÀÈÌÒÙÂÊÎÔÛÃÕÇ\s]/g, '')
+    });
+ 
