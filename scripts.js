@@ -3,6 +3,7 @@ const form = document.querySelector("form")
 const amount = document.getElementById("amount")
 const expense = document.getElementById("expense")
 const category = document.getElementById("category")
+const expenseInput = document.getElementById("expense");
 
 // Seleciona os elementos da lista
 const expenseList = document.querySelector("ul")
@@ -95,14 +96,33 @@ function expenseAdd(newExpense) {
         // Adiciona o item na lista
         expenseList.append(expenseItem)
 
+        
+
+        caracteres()
+
+        //Limpa os totais
+        formClear()
+
         // Atualiza os totais
         updateTotals()
+     } catch (error) {
+        alert("Erro ao adicionar despesa");
+        
+     }
+ }
 
-    } catch (error) {
-        alert("Não foi possível atualizar a lista de despesas.")
-        console.log(error)
+
+    // Adiciona um evento de entrada
+
+    function caracteres (){
+
+        expenseInput.addEventListener('input', () => {
+            // Remove caracteres que não são letras usando regex
+      
+            expenseInput.value = expenseInput.value.replace(/[^a-zA-ZáéíóúàèìòùâêîôûãõçÁÉÍÓÚÀÈÌÒÙÂÊÎÔÛÃÕÇ\s]/g, '')
+          });
+
     }
-}
 
 // Atualiza os totais
 function updateTotals() {
@@ -152,4 +172,28 @@ function updateTotals() {
         alert("Não foi possível atualizar os totais.")
         console.log(error)
     }
+}
+
+// Evento que captura cliques na lista
+
+expenseList.addEventListener("click", function(event){
+    // Verificar se o eletemento clicado é o icone de remover
+    if(event.target.classList.contains("remove-icon")){
+        const item = event.target.closest(".expense")
+
+        // remove o item da lista
+        item.remove()
+    }
+
+
+    updateTotals()
+})
+
+function formClear(){
+    //Limpar os inputs
+    expense.value = ""
+    category.value = ""
+    amount.value = ""
+
+    expense.focus()
 }
